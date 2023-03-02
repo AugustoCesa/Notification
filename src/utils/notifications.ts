@@ -1,13 +1,12 @@
-import { Plugins } from '@capacitor/core';
+import { Plugins } from "@capacitor/core";
+import { onMounted } from "vue";
 
 const { LocalNotifications } = Plugins;
 
 export const createNotification = async (title: string, body: string) => {
-  // Solicita permissão para enviar notificações
   await LocalNotifications.requestPermission();
 
-  // Cria a notificação local
-  await LocalNotifications.schedule({
+  const notification =  LocalNotifications.schedule({
     notifications: [
       {
         title,
@@ -17,8 +16,10 @@ export const createNotification = async (title: string, body: string) => {
         sound: null,
         attachments: null,
         actionTypeId: "",
-        extra: null
-      }
-    ]
+        extra: null,
+      },
+
+    ],
   });
+  onMounted(notification)
 };

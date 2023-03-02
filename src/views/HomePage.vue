@@ -6,7 +6,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <Ion-Button @click="createNotification">Criar Notificação</Ion-Button>
+      <Ion-Button @click="executeNotification">Criar Notificação</Ion-Button>
     </ion-content>
   </ion-page>
 </template>
@@ -20,7 +20,6 @@ import {
   IonContent,
   IonButton,
 } from "@ionic/vue";
-import { defineComponent } from "vue";
 import { createNotification } from "@/utils/notifications";
 
 export default {
@@ -34,10 +33,15 @@ export default {
     IonButton,
   },
 
-  methods: {
-    createNotification() {
+  setup() {
+    const executeNotification = () => {
+      console.log('test')
       createNotification("Título da notificação", "Corpo da notificação");
-    },
+    };
+
+    return{
+      executeNotification
+    }
   },
 };
 </script>
